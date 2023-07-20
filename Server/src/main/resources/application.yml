@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+
+
+file:
+  save:
+    path: "D:\\\\Users\\\\Administrator\\\\Desktop\\\\存储位置"
+
+  OriginalFilename: "D:\\\\Users\\\\Administrator\\\\Desktop\\\\efg"
