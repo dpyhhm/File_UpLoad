@@ -32,7 +32,7 @@ public class FileUploadController {
 
             String path = absolutePath.replaceAll(ORIGINAL_FILE_NAME, SAVE_PATH + "\\\\" + clientId);
             // 例如，保存文件到服务器或进行其他处理
-            File file1 = new File(path);
+            File file1 = new File(path);//创建多级目录
             if (!file1.exists()){
                 file1.mkdirs();
             }
