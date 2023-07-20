@@ -30,7 +30,7 @@ public class FileUploadController {
             // 在这里处理文件上传逻辑
             //file.transferTo(new File(absolutePath.replaceAll(absolutePath.substring(0,absolutePath.indexOf(ORIGINAL_FILE_NAME)), "存储位置")));
 
-            String path = absolutePath.replaceAll(ORIGINAL_FILE_NAME, SAVE_PATH + "\\\\" + clientId);
+            String path = absolutePath.replaceAll(ORIGINAL_FILE_NAME, SAVE_PATH + "/" + clientId);
             // 例如，保存文件到服务器或进行其他处理
             File file1 = new File(path);//创建多级目录
             if (!file1.exists()){

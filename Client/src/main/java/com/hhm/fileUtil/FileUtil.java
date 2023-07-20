@@ -1,8 +1,6 @@
 package com.hhm.fileUtil;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -57,7 +55,8 @@ public class FileUtil {
 
 
             entityBuilder.addBinaryBody("file", file, ContentType.APPLICATION_OCTET_STREAM, file.getName());
-            entityBuilder.addTextBody("AbsolutePath", file.getAbsolutePath(), contentType);
+            String replaceAbsolutePath = file.getAbsoluteFile().toString().replace('\\', '/');
+            entityBuilder.addTextBody("AbsolutePath", replaceAbsolutePath, contentType);
             entityBuilder.addTextBody("FileName", file.getName(), contentType);
             entityBuilder.addTextBody("ClientId", ClientId, contentType);
 

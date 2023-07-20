@@ -2,13 +2,13 @@ post:
   url: "http://localhost:8080/upload"
 
 file:
-    OriginalFilename: "D:\\\\Users\\\\Administrator\\\\Desktop\\\\efg"
+    OriginalFilename: "D:/Users/Administrator/Desktop/efg"
 
 upload:
   time: 9000
 
 client:
-  id: 6
+  id: 7
 
 spring:
   servlet:
