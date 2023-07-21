@@ -17,8 +17,8 @@ public class ClientApplication {
     @Value("${post.url}")
     private String URL;
 
-    @Value("${file.OriginalFilename}")
-    private String ORIGINAL_FILE_NAME;  // 文件夹路径
+    @Value("${file.UpLoadFileName}")
+    private String UPLOAD_FILE_NAME;  // 文件夹路径
 
     @Value("${client.id}")
     private String clientId;
@@ -29,7 +29,7 @@ public class ClientApplication {
 
     @Scheduled(fixedDelayString = "${upload.time}") // 每完整执行一次后隔9秒执行一次定时任务
     public void uploadFilesScheduledTask() {
-        String folderPath = ORIGINAL_FILE_NAME; // 文件夹路径
+        String folderPath = UPLOAD_FILE_NAME; // 文件夹路径
 
         File folder = new File(folderPath);
         //if (!folder.exists() || !folder.isDirectory()||!folder.isFile()) {
@@ -42,7 +42,7 @@ public class ClientApplication {
         for (File file : allFilesInFolder) {
             System.out.println(file.getAbsolutePath());
             try {
-                FileUtil.uploadFile(URL, file.getAbsolutePath(), clientId);
+                FileUtil.uploadFile(URL, file.getAbsolutePath(), clientId, UPLOAD_FILE_NAME);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

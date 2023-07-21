@@ -37,7 +37,7 @@ public class FileUtil {
         return fileList;
     }
 
-    public static void uploadFile(String serverUrl, String filePath, String ClientId) throws IOException {
+    public static void uploadFile(String serverUrl, String filePath, String ClientId, String UpLoadFileName) throws IOException {
         File file = new File(filePath);
         if (!file.exists() || !file.isFile()) {
             System.err.println("文件不存在或不是一个普通文件。");
@@ -58,7 +58,7 @@ public class FileUtil {
             //String replaceAbsolutePath = file.getAbsoluteFile().toString().replace('\\', '/');
             //entityBuilder.addTextBody("AbsolutePath", replaceAbsolutePath, contentType);
             entityBuilder.addTextBody("AbsolutePath", file.getAbsolutePath(), contentType);
-            entityBuilder.addTextBody("FileName", file.getName(), contentType);
+            entityBuilder.addTextBody("UpLoadFileName", UpLoadFileName, contentType);
             entityBuilder.addTextBody("ClientId", ClientId, contentType);
 
 
