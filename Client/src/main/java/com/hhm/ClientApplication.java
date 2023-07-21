@@ -32,8 +32,9 @@ public class ClientApplication {
         String folderPath = ORIGINAL_FILE_NAME; // 文件夹路径
 
         File folder = new File(folderPath);
-        if (!folder.exists() || !folder.isDirectory()) {
-            System.err.println("指定的文件夹路径不存在或不是一个文件夹。");
+        //if (!folder.exists() || !folder.isDirectory()||!folder.isFile()) {
+        if (!folder.exists()){
+            System.err.println("指定的文件路径不存在");
             return;
         }
 

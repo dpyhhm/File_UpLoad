@@ -55,8 +55,9 @@ public class FileUtil {
 
 
             entityBuilder.addBinaryBody("file", file, ContentType.APPLICATION_OCTET_STREAM, file.getName());
-            String replaceAbsolutePath = file.getAbsoluteFile().toString().replace('\\', '/');
-            entityBuilder.addTextBody("AbsolutePath", replaceAbsolutePath, contentType);
+            //String replaceAbsolutePath = file.getAbsoluteFile().toString().replace('\\', '/');
+            //entityBuilder.addTextBody("AbsolutePath", replaceAbsolutePath, contentType);
+            entityBuilder.addTextBody("AbsolutePath", file.getAbsolutePath(), contentType);
             entityBuilder.addTextBody("FileName", file.getName(), contentType);
             entityBuilder.addTextBody("ClientId", ClientId, contentType);
 
