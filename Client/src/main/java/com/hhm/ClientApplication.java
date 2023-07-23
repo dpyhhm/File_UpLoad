@@ -1,11 +1,13 @@
 package com.hhm;
 
-import com.hhm.fileUtil.FileUtil;
+import com.hhm.Util.DateUtil;
+import com.hhm.Util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.util.unit.DataUnit;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,9 @@ public class ClientApplication {
     @Value("${client.id}")
     private String clientId;
 
+    @Value("${file.UpLoadCacheFile}")
+    private String UpLoadCacheFile;
+
     public static void main(String[] args) {
         SpringApplication.run(ClientApplication.class,args);
     }
@@ -38,15 +43,28 @@ public class ClientApplication {
             return;
         }
 
-        List<File> allFilesInFolder = FileUtil.getAllFilesInFolder(folderPath);
-        for (File file : allFilesInFolder) {
+        List<File> allFilesInFolderReName = FileUtil.getAllFilesInFolder(folderPath);
+        for (File file : allFilesInFolderReName) {
             System.out.println(file.getAbsolutePath());
+            String newPath = file.getAbsoluteFile().toString().replace(UPLOAD_FILE_NAME, UpLoadCacheFile);
+            String subFile = newPath.substring(0, newPath.indexOf(file.getName()));
+            File subfile = new File(subFile);
+            if (!subfile.exists()){
+                subfile.mkdirs();
+            }
+            System.out.println(newPath);
+            boolean b = file.renameTo(new File(newPath));
+            if (!b){
+                System.out.println(file.getAbsolutePath() + "文件被占用，本次无法上传/上一个文件未完成上传");
+            }
+        }
+        List<File> allFilesInFolderUpLoad = FileUtil.getAllFilesInFolder(UpLoadCacheFile);
+        for (File file : allFilesInFolderUpLoad) {
             try {
-                FileUtil.uploadFile(URL, file.getAbsolutePath(), clientId, UPLOAD_FILE_NAME);
+                FileUtil.uploadFile(URL, file, clientId + File.separator + DateUtil.getDate(), UpLoadCacheFile);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     }
-
 }

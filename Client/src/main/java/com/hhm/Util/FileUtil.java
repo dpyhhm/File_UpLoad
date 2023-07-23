@@ -1,4 +1,4 @@
-package com.hhm.fileUtil;
+package com.hhm.Util;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -37,8 +37,8 @@ public class FileUtil {
         return fileList;
     }
 
-    public static void uploadFile(String serverUrl, String filePath, String ClientId, String UpLoadFileName) throws IOException {
-        File file = new File(filePath);
+    public static void uploadFile(String serverUrl, File file, String ClientId, String UpLoadFileName) throws IOException {
+
         if (!file.exists() || !file.isFile()) {
             System.err.println("文件不存在或不是一个普通文件。");
             return;
@@ -71,6 +71,7 @@ public class FileUtil {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == 200) {
                     System.out.println("文件上传成功。");
+                    file.delete();
                 } else {
                     System.out.println("文件上传失败，服务器返回：" + statusCode);
                 }
