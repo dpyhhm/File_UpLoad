@@ -1,5 +1,6 @@
 package com.hhm.util;
 
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 
 public class ExcelUtil {
     public static void appendToExcel(MultipartFile uploadedFile, String existingFilePath) throws IOException {
+        ZipSecureFile.setMinInflateRatio(0);
         // 读取上传的Excel文件内容
         InputStream inputStream = uploadedFile.getInputStream();
         Workbook uploadedWorkbook = new XSSFWorkbook(inputStream);

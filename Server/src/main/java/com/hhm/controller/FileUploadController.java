@@ -25,6 +25,8 @@ public class FileUploadController {
     @PostMapping("/upload")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("AbsolutePath") String absolutePath,
         @RequestParam("ClientId") String clientId, @RequestParam("UpLoadFileName") String upLoadFileName) {
+        String path = "";
+        String substring = "";
         try {
             //System.out.println(absolutePath);
             //System.out.println(fileName);
@@ -34,10 +36,12 @@ public class FileUploadController {
             //file.transferTo(new File(absolutePath.replaceAll(absolutePath.substring(0,absolutePath.indexOf(ORIGINAL_FILE_NAME)), "存储位置")));
 
             //String path = absolutePath.replaceAll(ORIGINAL_FILE_NAME, SAVE_PATH + "/" + clientId);
-            String path = Paths.get(Paths.get(SAVE_PATH,clientId).toString(), absolutePath.substring(upLoadFileName.length() + 1)).toString();
+            path = Paths.get(Paths.get(SAVE_PATH,clientId).toString(), absolutePath.substring(upLoadFileName.length() + 1)).toString();
             // 例如，保存文件到服务器或进行其他处理
             File file1 = new File(path);//创建多级目录
-            String substring = path.substring(path.indexOf("."));
+            if (path.contains(".")){
+                substring = path.substring(path.lastIndexOf("."));
+            }
             if (!file1.exists()){
                 file1.mkdirs();
                 file.transferTo(file1);
@@ -57,6 +61,7 @@ public class FileUploadController {
             return ResponseEntity.status(HttpStatus.OK).body("文件上传成功。");
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(path);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("文件上传失败。");
         }
     }

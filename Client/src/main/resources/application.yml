@@ -2,8 +2,8 @@ post:
   url: "http://localhost:8080/upload"
 
 file:
-    UpLoadFileName: D:\Users\Administrator\Desktop\testClient
-    UpLoadCacheFile: D:\Users\Administrator\Desktop\cache
+    UpLoadFileName: G:\desktop_job\client
+    UpLoadCacheFile: G:\desktop_job\cache
 
 upload:
   time: 9000

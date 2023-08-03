@@ -25,7 +25,7 @@ public class FileUtil {
         }
 
         File[] files = folder.listFiles();
-        if (files != null) {
+        if (files != null && files.length != 0) {
             for (File file : files) {
                 if (file.isFile()) {
                     fileList.add(file);

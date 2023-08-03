@@ -7,6 +7,6 @@ server:
 
 file:
   save:
-    path: D:\Users\Administrator\Desktop\testServer
+    path: G:\desktop_job\server
 
 #  OriginalFilename: "D:\\Users\\Administrator\\Desktop\\efg" #注意长度与客户端路径长度匹配
